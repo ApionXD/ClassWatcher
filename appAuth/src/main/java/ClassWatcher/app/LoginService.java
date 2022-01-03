@@ -2,17 +2,17 @@ package ClassWatcher.app;
 
 import ClassWatcher.app.properties.AppProperties;
 import ClassWatcher.app.properties.PropUtil;
-import com.beust.jcommander.internal.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,8 +40,14 @@ public class LoginService {
                     driver = new FirefoxDriver();
                     break;
                 case "headless_chrome":
+                    System.setProperty("webdriver.chrome.driver", properties.getProperty("driver_path"));
+                    ChromeOptions options = new ChromeOptions();
+                    options.setHeadless(true);
+                    driver = new ChromeDriver(options);
                     break;
                 case "chrome":
+                    System.setProperty("webdriver.chrome.driver", properties.getProperty("driver_path"));
+                    driver = new ChromeDriver();
                     break;
                 default:
                     log.error("Invalid browser set in properties!");
