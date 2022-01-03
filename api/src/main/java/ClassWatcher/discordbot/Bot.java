@@ -1,6 +1,6 @@
 package ClassWatcher.discordbot;
 
-import ClassWatcher.discordbot.command.Course;
+import ClassWatcher.discordbot.command.Section;
 import ClassWatcher.discordbot.command.Help;
 import ClassWatcher.discordbot.command.SetPrefix;
 import ClassWatcher.discordbot.command.base.CommandUtil;
@@ -14,7 +14,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
 import javax.security.auth.login.LoginException;
-import java.util.Properties;
 
 @Slf4j @Getter
 /*
@@ -97,7 +96,7 @@ public class Bot {
         notificationUtil = new NotificationUtil();
 
         commandUtil.addCommands(new SetPrefix());
-        commandUtil.addCommands(new Course());
+        commandUtil.addCommands(new Section());
 
         reactionUtil.addCommands(new Help());
     }
