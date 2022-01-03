@@ -30,7 +30,7 @@ public class ResponseController {
     public ResponseController() {
         pendingRequests = new HashMap<String, Future<Set<Cookie>>>();
     }
-    @PostMapping(value = "/api", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<String> getCookiesForUser(@RequestBody String request, LoginService loginService, Gson gson) throws ExecutionException, InterruptedException {
         JsonObject requestObj = gson.fromJson(request, JsonObject.class);

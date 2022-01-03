@@ -16,16 +16,16 @@ public class AppProperties extends Properties {
         propertyDefaults.put("enable_discord", "false");
         propertyDefaults.put("discord_bot_token", "");
         propertyDefaults.put("discord_slow_mode", "false");
-        propertyDefaults.put("username", "AAA11A");
-        propertyDefaults.put("password", "password");
-        propertyDefaults.put("auth_url", "127.0.0.1:8080/api");
+        propertyDefaults.put("username", "");
+        propertyDefaults.put("password", "");
+        propertyDefaults.put("auth_url", "http://127.0.0.1:8080/api");
         propertyDefaults.put("api_url", "https://fsu.collegescheduler.com/api");
     }
 
     public void updateProperties() {
         this.propertyDefaults.keySet().forEach(s -> {
             if (!this.containsKey(s)) {
-                log.warn("Adding " + s + " to bot.properties");
+                log.warn("Adding " + s + " to app.properties");
                 this.put(s, propertyDefaults.get(s));
             }
         });

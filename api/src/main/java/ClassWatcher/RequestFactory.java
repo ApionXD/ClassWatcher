@@ -48,8 +48,9 @@ public class RequestFactory {
         JsonObject requestBody = new JsonObject();
         requestBody.add("username", new JsonPrimitive(username));
         requestBody.add("password", new JsonPrimitive(pass));
+
         RequestBody body = RequestBody.create(requestBody.toString(), MediaType.get("application/json; charset=utf-8"));
-        Request request = new Request.Builder().url(authURL).post(body).build();
+        Request request = new Request.Builder().url(authURL + "/login").post(body).build();
         try {
             Response response = client.newCall(request).execute();
             String id = "";
@@ -62,7 +63,7 @@ public class RequestFactory {
                 requestBody = new JsonObject();
                 requestBody.add("id", new JsonPrimitive(id));
                 body = RequestBody.create(requestBody.toString(), MediaType.get("application/json; charset=utf-8"));
-                request = new Request.Builder().url("http://127.0.0.1:8080/status").post(body).build();
+                request = new Request.Builder().url(authURL + "/status").post(body).build();
                 response = client.newCall(request).execute();
                 Thread.sleep(5000);
             }
@@ -72,7 +73,7 @@ public class RequestFactory {
             e.printStackTrace();
         }
     }
-    private void refreshTermNames() throws IOException, ExecutionException {
+    public void refreshTermNames() throws IOException, ExecutionException {
         termNames = new HashSet<String>();
         String randomUser = "";
         randomUser = users.get((int) (Math.random() * (users.size() - 1)));

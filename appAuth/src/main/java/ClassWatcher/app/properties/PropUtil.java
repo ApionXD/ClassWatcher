@@ -11,7 +11,7 @@ import java.util.Properties;
 
 @Slf4j
 public class PropUtil {
-    public static final String PROP_FILE_PATH = "properties/app.properties";
+    public static final String PROP_FILE_PATH = "properties/auth.properties";
 
     //Reads/creates a new properties files and checks that it has all values that are needed.
     @SneakyThrows

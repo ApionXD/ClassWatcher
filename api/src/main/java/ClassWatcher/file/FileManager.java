@@ -45,7 +45,12 @@ public class FileManager {
         if (!Files.exists(filePath)) {
             log.warn(fileName + " doesn't exist! Attempting to create it now!");
             try {
-                Files.createDirectories(filePath.subpath(0, filePath.getNameCount() - 1));
+                Files.createDirectories(filePath.getParent());
+            } catch (Exception e) {
+                log.error("Error creating parent folder for " + fileName + "! This may cause issues!");
+                log.debug(e.toString());
+            }
+            try {
                 Files.createFile(filePath);
             } catch (IOException e) {
                 log.error("Could not create " + fileName + "! This may cause issues!");
