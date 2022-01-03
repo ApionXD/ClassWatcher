@@ -31,10 +31,6 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
-    <logger name="org.springframework" level="INFO">
-        <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
-    </logger>
 
     <!-- LOG everything at INFO level -->
     <root level="INFO">

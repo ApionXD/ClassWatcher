@@ -40,11 +40,11 @@ public class RequestFactory {
         users = Lists.newArrayList();
     }
     public void addUser(String username, String pass) {
-        log.info("Added " + username);
+        log.info("Added {}", username);
         users.add(username);
         passwordMap.put(username, pass);
 
-        log.info("Getting cookies for " + username);
+        log.info("Getting cookies for {}", username);
         JsonObject requestBody = new JsonObject();
         requestBody.add("username", new JsonPrimitive(username));
         requestBody.add("password", new JsonPrimitive(pass));
@@ -67,7 +67,7 @@ public class RequestFactory {
                 response = client.newCall(request).execute();
                 Thread.sleep(5000);
             }
-            log.info("Response obtained for user " + username);
+            log.info("Response obtained for user {}", username);
             cookieMap.put(username, GSON.fromJson(response.body().string(), JsonObject.class));
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,7 +84,6 @@ public class RequestFactory {
                 cookieText.append(e.getKey()).append("=").append(e.getValue().getAsString()).append(";");
             }
         });
-        log.info(String.format("Cookie: %s", cookieText.toString()));
         Request termRequest = new Request.Builder().url(url).header("Cookie", cookieText.toString()).get().build();
         String jsonString = client.newCall(termRequest).execute().body().string();
         Term[] terms = GSON.fromJson(jsonString, Term[].class);
@@ -99,7 +98,7 @@ public class RequestFactory {
             refreshTermNames();
         }
         if (!termNames.contains(term)) {
-            log.error("Term " + term + " is not in the terms list");
+            log.error("Term {} is not in the terms list", term);
             log.error("Valid terms are: ");
             for (String s : termNames) {
                 log.error(s);

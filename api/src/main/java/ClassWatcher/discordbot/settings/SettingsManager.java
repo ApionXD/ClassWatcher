@@ -52,7 +52,7 @@ public class SettingsManager {
                      */
                     public Settings load(String key) throws Exception {
                         log.debug("Guild " + key + " settings is not in cache! Attempting to fetch it.");
-                        String fileName = "settings\\" + App.DISCORD_BOT.getJda().getGuildById(key).getName() + ".json";
+                        String fileName = "settings/" + App.DISCORD_BOT.getJda().getGuildById(key).getName() + ".json";
                         Path filePath = FileManager.forceReadFile(fileName);
                         FileReader reader = new FileReader(fileName);
                         Settings result = FileManager.GSON_INSTANCE.fromJson(reader, Settings.class);
@@ -72,7 +72,7 @@ public class SettingsManager {
          *  Maybe make a list of fields and check if they exist
          */
         guildList.forEach(g -> {
-            Path settingFile = FileManager.forceReadFile("settings\\" + g.getName() + ".json");
+            Path settingFile = FileManager.forceReadFile("settings/" + g.getName() + ".json");
             log.info("Settings file for " + g.getName() + "at " + settingFile);
             FileWriter settingsWriter = null;
             try {
