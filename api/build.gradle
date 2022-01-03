@@ -5,6 +5,7 @@
 plugins {
     id 'application'
     id 'ClassWatcher.java-library-conventions'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 repositories {
     // Use Maven Central for resolving dependencies.
