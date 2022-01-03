@@ -40,10 +40,6 @@ public class NotificationUtil implements NotificationMethod {
         checkerMap.remove(notifID);
         JDA jdaInstance = App.DISCORD_BOT.getJda();
         Guild g = jdaInstance.getGuildById(guildID);
-        String mention = g.getMemberById(userID).getAsMention();
-        String channelID = App.DISCORD_BOT.getSettingsManager().getSettingsFromGuildID(guildID).getCommandChannelID();;
-        TextChannel channel = (TextChannel) g.getGuildChannelById(channelID);
-        channel.sendMessage(mention).queue();
-        channel.sendMessage(new EmbedBuilder(CommandUtil.BASE_EMBED).addField("Class Name", request.getCourseCat() + " " + request.getCourseID(), true).addField("Status", "Open", true).addField("Section", String.valueOf(request.getSectionNum()), true).build()).queue();
+        g.getMemberById(userID).getUser().openPrivateChannel().complete().sendMessage(new EmbedBuilder(CommandUtil.BASE_EMBED).addField("Class Name", request.getCourseCat() + " " + request.getCourseID(), true).addField("Status", "Open", true).addField("Section", String.valueOf(request.getSectionNum()), true).build()).queue();
     }
 }
